@@ -6,10 +6,6 @@ import requests
 import os
 from github import Github
 from github.GithubException import GithubException
-from dotenv import load_dotenv
-
-load_dotenv()
-
 # Настройки GitHub
 GITHUB_REPO = 'SecRifal/TGDPSJ'
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')

@@ -37,7 +37,13 @@ async def slash_ill_add(ctx: discord.Interaction,
                         creator: str,
                         video_url: str = None,
                         img: discord.Attachment = None):
-    await ctx.response.defer()
+    try:
+        await ctx.response.defer()
+    except discord.errors.NotFound as e:
+        if e.code == 10062:  # Unknown interaction
+            return  # Interaction timed out, nothing we can do
+        else:
+            raise  # Re-raise other NotFound errors
 
     # Проверка прикрепления img
     if not img:

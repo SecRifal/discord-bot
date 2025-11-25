@@ -51,8 +51,16 @@ async def slash_ill_add(ctx: discord.Interaction,
         # Скачать изображение
         image_data = requests.get(img.url).content
 
-        # Путь для файла: images/impossible/{level_id}_{img.filename}
-        image_path = f'images/impossible/{level_id}_{img.filename}'
+        # Определить расширение файла (сохранить оригинальное)
+        ext = img.filename.rsplit('.', 1)[-1] if '.' in img.filename else 'png'
+
+        # Создать имя файла на основе названия уровня, санитизировать
+        import re
+        sanitized_name = re.sub(r'[^\w\-_\. ]', '_', name).strip().replace(' ', '_')
+        image_filename = f"{sanitized_name}.{ext}"
+
+        # Путь для файла: images/impossible/{image_filename}
+        image_path = f'images/impossible/{image_filename}'
 
         # Создаёт папку images/impossible автоматически при загрузке файла
         try:

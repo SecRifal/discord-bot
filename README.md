@@ -4,7 +4,7 @@
 
 ## Настройка
 
-1. Установите зависимости: `pip install discord.py pygithub python-dotenv requests`
+1. Установите зависимости: `pip install -r requirements.txt`
 
 2. Заполните .env файл:
    ```

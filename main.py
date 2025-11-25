@@ -11,6 +11,13 @@ GITHUB_REPO = 'SecRifal/TGDPSJ'
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
+# Проверка наличия токенов
+if not GITHUB_TOKEN:
+    raise ValueError("GITHUB_TOKEN environment variable is not set.")
+
+if not DISCORD_TOKEN:
+    raise ValueError("DISCORD_TOKEN environment variable is not set.")
+
 # Discord Bot настройки
 intents = discord.Intents.default()
 intents.message_content = True
@@ -44,10 +51,10 @@ async def slash_ill_add(ctx: discord.Interaction,
         # Скачать изображение
         image_data = requests.get(img.url).content
 
-        # Путь для файла: imgs/impossible/{level_id}_{img.filename}
-        image_path = f'imgs/impossible/{level_id}_{img.filename}'
+        # Путь для файла: images/impossible/{level_id}_{img.filename}
+        image_path = f'images/impossible/{level_id}_{img.filename}'
 
-        # Проверить, существует ли папка imgs/impossible, если нет - создать путем загрузки файла с путем
+        # Создаёт папку images/impossible автоматически при загрузке файла
         try:
             repo.create_file(path=image_path, message=f"Upload image for {name}", content=image_data)
             img_url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{image_path}"

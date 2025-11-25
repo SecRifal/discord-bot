@@ -48,10 +48,10 @@ async def slash_ill_add(ctx: discord.Interaction,
         # Скачать изображение
         image_data = requests.get(img.url).content
 
-        # Путь для файла: imgs/impossibles/{level_id}_{img.filename}
-        image_path = f'imgs/impossibles/{level_id}_{img.filename}'
+        # Путь для файла: imgs/impossible/{level_id}_{img.filename}
+        image_path = f'imgs/impossible/{level_id}_{img.filename}'
 
-        # Проверить, существует ли папка imgs/impossibles, если нет - создать путем загрузки файла с путем
+        # Проверить, существует ли папка imgs/impossible, если нет - создать путем загрузки файла с путем
         try:
             repo.create_file(path=image_path, message=f"Upload image for {name}", content=image_data)
             img_url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{image_path}"
@@ -70,8 +70,8 @@ async def slash_ill_add(ctx: discord.Interaction,
             "img": img_url
         }
 
-        # Получить или создать impossibles.json
-        filename = 'impossibles.json'
+        # Получить или создать impossible.json
+        filename = 'impossible.json'
         commit_msg = f"Added impossible level {name}"
 
         try:
